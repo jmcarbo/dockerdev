@@ -30,3 +30,4 @@ RUN mkdir -p ~/.vim/autoload ~/.vim/bundle && \
         curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 RUN echo "execute pathogen#infect()\nsyntax on\nfiletype plugin indent on" >~/.vimrc
 RUN cd ~/.vim/bundle && git clone https://github.com/fatih/vim-go.git
+RUN go get github.com/mwgg/passera/src && mv ~/go/bin/src ~/go/bin/passera
