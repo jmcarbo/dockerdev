@@ -7,6 +7,18 @@ RUN apt-get update && apt-get install -y \
                 --no-install-recommends \
         && rm -rf /var/lib/apt/lists/*
 
+RUN apt-get install -qqy \
+    apt-transport-https \
+    ca-certificates \
+    lxc \
+    iptables
+    
+# Install Docker from Docker Inc. repositories.
+RUN echo deb https://get.docker.io/ubuntu docker main > /etc/apt/sources.list.d/docker.list \
+  && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9 \
+  && apt-get update -qq \
+  && apt-get install -qqy lxc-docker
+  
 ENV GOLANG_VERSION 1.4.1
 
 RUN curl -sSL https://golang.org/dl/go$GOLANG_VERSION.src.tar.gz \
