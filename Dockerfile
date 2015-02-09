@@ -1,7 +1,7 @@
 FROM ubuntu
 RUN apt-get update && apt-get -y install git make gcc
 RUN apt-get -y install vim
-RUN apt-get -y install curl tmux
+RUN apt-get -y install curl tmux mutt
 RUN apt-get update && apt-get install -y \
                 gcc libc6-dev make \
                 --no-install-recommends \
