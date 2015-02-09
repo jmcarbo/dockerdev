@@ -48,7 +48,7 @@ RUN echo 'swuser:123456' | chpasswd
 RUN usermod -a -G docker swuser
 RUN addgroup admin
 RUN usermod -a -G admin swuser
-RUN apt-get install -y wget unzip
+RUN apt-get install -y wget unzip libssl-dev
 RUN wget http://elinks.or.cz/download/elinks-current-0.13.tar.bz2 && tar xjvf elinks-current-0.13.tar.bz2 && cd elinks-0.13* && ./configure && make -j8 && make install
 RUN wget http://downloads.rclone.org/rclone-v1.09-linux-amd64.zip && unzip rclone* && cp rclone*/rclone /usr/local/bin
 RUN apt-get install -y urlview muttprint muttprint-manual mutt-patched w3m
@@ -59,6 +59,7 @@ RUN \
 EXPOSE 5901
 RUN apt-get install -y firefox
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+RUN apt-get install -y uzbl
 
 USER swuser
 WORKDIR /home/swuser
@@ -67,4 +68,5 @@ RUN mkdir -p ~/.vim/autoload ~/.vim/bundle && \
 RUN echo "execute pathogen#infect()\nsyntax on\nfiletype plugin indent on" >~/.vimrc
 RUN cd ~/.vim/bundle && git clone https://github.com/fatih/vim-go.git
 RUN go get github.com/mwgg/passera/src && mv ~/go/bin/src ~/go/bin/passera
+RUN go get github.com/MaximeD/gost
 CMD [ "/bin/bash" ]
