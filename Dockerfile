@@ -24,6 +24,7 @@ ENV PATH /home/swuser/go/bin:$PATH
 RUN groupadd -r swuser -g 433 && \
         useradd -u 431 -r -g swuser -d /home/swuser -s /sbin/nologin -c "Docker image user" swuser && \
         chown -R swuser:swuser /home/swuser
+RUN echo 'swuser:123456' | chpasswd
 USER swuser
 WORKDIR /home/swuser
 RUN mkdir -p ~/.vim/autoload ~/.vim/bundle && \
