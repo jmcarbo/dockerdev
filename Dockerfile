@@ -59,7 +59,8 @@ RUN \
 EXPOSE 5901
 RUN apt-get install -y firefox
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-RUN apt-get install -y uzbl
+RUN apt-get install -y uzbl mercurial meld
+RUN wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sudo sh
 
 USER swuser
 WORKDIR /home/swuser
@@ -69,4 +70,5 @@ RUN echo "execute pathogen#infect()\nsyntax on\nfiletype plugin indent on" >~/.v
 RUN cd ~/.vim/bundle && git clone https://github.com/fatih/vim-go.git
 RUN go get github.com/mwgg/passera/src && mv ~/go/bin/src ~/go/bin/passera
 RUN go get github.com/MaximeD/gost
+RUN go get github.com/kr/godep
 CMD [ "/bin/bash" ]
