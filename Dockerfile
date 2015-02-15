@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM phusion/baseimage:0.9.16
 RUN apt-get update && apt-get -y install git make gcc
 RUN apt-get -y install vim
 RUN apt-get -y install curl tmux mutt
@@ -60,6 +60,7 @@ EXPOSE 5901
 RUN apt-get install -y firefox
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 RUN apt-get install -y uzbl mercurial meld
+RUN apt-get install -y i3 terminator feh dmenu dunst connman-ui rox-filer hexchat vim-gtk
 RUN wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sudo sh
 
 USER swuser
