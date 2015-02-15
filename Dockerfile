@@ -65,11 +65,16 @@ RUN wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sudo sh
 
 USER swuser
 WORKDIR /home/swuser
-RUN mkdir -p ~/.vim/autoload ~/.vim/bundle && \
-        curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
-RUN echo "execute pathogen#infect()\nsyntax on\nfiletype plugin indent on" >~/.vimrc
-RUN cd ~/.vim/bundle && git clone https://github.com/fatih/vim-go.git
-RUN go get github.com/mwgg/passera/src && mv ~/go/bin/src ~/go/bin/passera
+RUN mkdir -p /home/swuser/.vim/autoload /home/swuser/.vim/bundle && \
+        curl -LSso /home/swuser/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+RUN echo "execute pathogen#infect()\nsyntax on\nfiletype plugin indent on" >/home/swuser/.vimrc
+RUN cd /home/swuser/.vim/bundle && git clone https://github.com/fatih/vim-go.git
+RUN go get github.com/mwgg/passera/src #&& mv /home/swuser/go/bin/src /home/swuser/go/bin/passera
 RUN go get github.com/MaximeD/gost
 RUN go get github.com/kr/godep
-CMD [ "/bin/bash" ]
+
+#===============
+CMD [ "/sbin/my_init" ]
+#===============
+# Clean up APT when done.
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
