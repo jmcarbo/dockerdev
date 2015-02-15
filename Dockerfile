@@ -63,6 +63,9 @@ RUN apt-get install -y uzbl mercurial meld
 RUN apt-get install -y i3 terminator feh dmenu dunst connman-ui rox-filer hexchat vim-gtk
 RUN wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sudo sh
 
+# Clean up APT when done.
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 USER swuser
 WORKDIR /home/swuser
 RUN mkdir -p /home/swuser/.vim/autoload /home/swuser/.vim/bundle && \
@@ -76,5 +79,4 @@ RUN go get github.com/kr/godep
 #===============
 CMD [ "/sbin/my_init" ]
 #===============
-# Clean up APT when done.
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
