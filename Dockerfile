@@ -76,6 +76,7 @@ RUN go get github.com/mwgg/passera/src #&& mv /home/swuser/go/bin/src /home/swus
 RUN go get github.com/MaximeD/gost
 RUN go get github.com/kr/godep
 
+USER root
 #===============
 CMD [ "/sbin/my_init" ]
 #===============
